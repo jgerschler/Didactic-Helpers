@@ -1,4 +1,4 @@
-import pygame, time, sys
+import pygame, time, sys, argparse
 from random import randint
 
 class CountdownClock(object):
@@ -74,10 +74,14 @@ class CountdownClock(object):
         pygame.quit()
         quit()
 
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="CountdownClock.py v1.0 A large-font graphical countdown clock. (c) J.J. Gerschler")
+    parser.add_argument("-s", "--seconds", help="Number of seconds to count down.")
 
-#starttime = int(raw_input('How many seconds?'))
-NewClock = CountdownClock(10)
-NewClock.main_loop()
-
-
+    args = parser.parse_args()
+    print("")
+    print("When screen loads, press the spacebar to start the countdown!")
+    print("")
+    NewClock = CountdownClock(int(args.seconds))
+    NewClock.main_loop()
 
