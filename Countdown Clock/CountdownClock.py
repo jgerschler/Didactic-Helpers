@@ -2,39 +2,45 @@ import pygame, time, sys
 from random import randint
 
 class CountdownClock(object):
-    def __init__(self, startTime):
-        self.display_width = 1024
-        self.display_height = 768
+    def __init__(self, StartTime):
+        self.DISPLAY_WIDTH = 1024
+        self.DISPLAY_HEIGHT = 768
 
-        self.black = (0,0,0)
-        self.white = (255,255,255)
-        self.red = (255,0,0)
+        self.BLACK = (0,0,0)
+        self.WHITE = (255,255,255)
+        self.RED = (255,0,0)
 
-        self.finished = False
-
-        self.GameDisplay = pygame.display.set_mode((self.display_width, self.display_height))
-        self.pygame.display.set_caption('Countdown Clock')
-        self.GameDisplay.fill(self.white)
-        self.pygame.display.update()
+        self.Finished = False
+        self.StartTime = StartTime
+        
+        pygame.init()
+        pygame.mixer.init()
+        self.TimesUpFile = "TimesUp.ogg"
+        self.TimesUpSound = pygame.mixer.Sound(self.TimesUpFile)
+        
+        self.GameDisplay = pygame.display.set_mode((self.DISPLAY_WIDTH, self.DISPLAY_HEIGHT))
+        pygame.display.set_caption('Countdown Clock')
+        self.GameDisplay.fill(self.WHITE)
+        pygame.display.update()
 
     def text_objects(self, text, font):
-        textSurface = font.render(text, True, black)
+        textSurface = font.render(text, True, self.BLACK)
         return textSurface, textSurface.get_rect()
 
     def red_text_objects(self, text, font):
-        textSurface = font.render(text, True, red)
+        textSurface = font.render(text, True, self.RED)
         return textSurface, textSurface.get_rect()
 
     def message_display(self, text):
         largeText = pygame.font.Font('arial.ttf',240)
         TextSurf, TextRect = text_objects(text, largeText)
-        TextRect.center = ((display_width/2),(display_height/2))
+        TextRect.center = ((DISPLAY_WIDTH/2),(DISPLAY_HEIGHT/2))
         self.GameDisplay.blit(TextSurf, TextRect)
 
     def urgent_message_display(self, text):
         largeText = pygame.font.Font('arial.ttf',240)
         TextSurf, TextRect = red_text_objects(text, largeText)
-        TextRect.center = ((self.display_width/2),(self.display_height/2))
+        TextRect.center = ((self.DISPLAY_WIDTH/2),(self.DISPLAY_HEIGHT/2))
         self.GameDisplay.blit(TextSurf, TextRect)    
 
     def times_up(self):
@@ -42,37 +48,36 @@ class CountdownClock(object):
         sys.exit()
 
     def main_loop(self):
-        while not finished:
+        while not self.Finished:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    finished = True
+                    self.Finished = True
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_SPACE:
-                        for t in range(starttime,-1,-1):
-                            GameDisplay.fill(white)
+                        for t in range(self.StartTime,-1,-1):
+                            self.GameDisplay.fill(self.WHITE)
                             minutes = t / 60
                             seconds = t % 60
                             sf = "{:02d}:{:02d}".format(*divmod(t, 60))
                             if t < 10:
-                                urgent_message_display(sf)
+                                self.urgent_message_display(sf)
                             else:
-                                message_display(sf)
+                                self.message_display(sf)
                             pygame.event.get()
                             time.sleep(1)
                             pygame.display.update()
                             
-                        TimesUpSound.play()
+                        self.TimesUpSound.play()
                         time.sleep(4)
-                        times_up()
+                        self.times_up()
                         
         pygame.quit()
         quit()
 
 
-starttime = int(raw_input('How many seconds?'))
+#starttime = int(raw_input('How many seconds?'))
+NewClock = CountdownClock(10)
+NewClock.main_loop()
 
 
-TimesUpFile = "TimesUp.ogg"
-pygame.init()
-pygame.mixer.init()
-TimesUpSound = pygame.mixer.Sound(TimesUpFile)
+
