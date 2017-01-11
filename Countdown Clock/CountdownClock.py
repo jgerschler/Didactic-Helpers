@@ -24,24 +24,24 @@ class CountdownClock(object):
         pygame.display.update()
 
     def text_objects(self, text, font):
-        textSurface = font.render(text, True, self.BLACK)
-        return textSurface, textSurface.get_rect()
+        self.textSurface = font.render(text, True, self.BLACK)
+        return self.textSurface, self.textSurface.get_rect()
 
     def red_text_objects(self, text, font):
-        textSurface = font.render(text, True, self.RED)
-        return textSurface, textSurface.get_rect()
+        self.textSurface = font.render(text, True, self.RED)
+        return self.textSurface, self.textSurface.get_rect()
 
     def message_display(self, text):
-        largeText = pygame.font.Font('arial.ttf',240)
-        TextSurf, TextRect = text_objects(text, largeText)
-        TextRect.center = ((DISPLAY_WIDTH/2),(DISPLAY_HEIGHT/2))
-        self.GameDisplay.blit(TextSurf, TextRect)
+        self.largeText = pygame.font.Font('arial.ttf',240)
+        self.TextSurf, self.TextRect = self.text_objects(text, self.largeText)
+        self.TextRect.center = ((self.DISPLAY_WIDTH/2),(self.DISPLAY_HEIGHT/2))
+        self.GameDisplay.blit(self.TextSurf, self.TextRect)
 
     def urgent_message_display(self, text):
-        largeText = pygame.font.Font('arial.ttf',240)
-        TextSurf, TextRect = red_text_objects(text, largeText)
-        TextRect.center = ((self.DISPLAY_WIDTH/2),(self.DISPLAY_HEIGHT/2))
-        self.GameDisplay.blit(TextSurf, TextRect)    
+        self.largeText = pygame.font.Font('arial.ttf',240)
+        self.TextSurf, self.TextRect = self.red_text_objects(text, self.largeText)
+        self.TextRect.center = ((self.DISPLAY_WIDTH/2),(self.DISPLAY_HEIGHT/2))
+        self.GameDisplay.blit(self.TextSurf, self.TextRect)    
 
     def times_up(self):
         pygame.quit()
