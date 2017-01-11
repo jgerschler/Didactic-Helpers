@@ -32,14 +32,14 @@ class CountdownClock(object):
         return self.textSurface, self.textSurface.get_rect()
 
     def message_display(self, text):
-        self.largeText = pygame.font.Font('arial.ttf',240)
-        self.TextSurf, self.TextRect = self.text_objects(text, self.largeText)
+        self.LargeText = pygame.font.Font('arial.ttf',240)
+        self.TextSurf, self.TextRect = self.text_objects(text, self.LargeText)
         self.TextRect.center = ((self.DISPLAY_WIDTH/2),(self.DISPLAY_HEIGHT/2))
         self.GameDisplay.blit(self.TextSurf, self.TextRect)
 
     def urgent_message_display(self, text):
-        self.largeText = pygame.font.Font('arial.ttf',240)
-        self.TextSurf, self.TextRect = self.red_text_objects(text, self.largeText)
+        self.LargeText = pygame.font.Font('arial.ttf',240)
+        self.TextSurf, self.TextRect = self.red_text_objects(text, self.LargeText)
         self.TextRect.center = ((self.DISPLAY_WIDTH/2),(self.DISPLAY_HEIGHT/2))
         self.GameDisplay.blit(self.TextSurf, self.TextRect)    
 
