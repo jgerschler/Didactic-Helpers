@@ -1,8 +1,8 @@
-import pygame, time
+import pygame, time, argparse
 from random import randint
 
 class RandomNumberGenerator(object):
-    def __init__(self, LowerLimit, UpperLimit)
+    def __init__(self, LowerLimit, UpperLimit):
         self.DISPLAY_WIDTH = 1024
         self.DISPLAY_HEIGHT = 768
 
@@ -10,6 +10,9 @@ class RandomNumberGenerator(object):
         self.WHITE = (255,255,255)
 
         self.Finished = False
+        
+        self.LowerLimit = LowerLimit
+        self.UpperLimit = UpperLimit
 
         pygame.init()
         
@@ -19,7 +22,7 @@ class RandomNumberGenerator(object):
         pygame.display.update()
         
     def text_objects(self, text, font):
-        self.textSurface = font.render(text, True, black)
+        self.textSurface = font.render(text, True, self.BLACK)
         return self.textSurface, self.textSurface.get_rect()
 
     def message_display(self, text):
@@ -35,15 +38,21 @@ class RandomNumberGenerator(object):
                     self.Finished = True
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_SPACE:
-                        GameDisplay.fill(white)
-                        self.message_display(str(randint(lowint,highint)))
+                        self.GameDisplay.fill(self.WHITE)
+                        self.message_display(str(randint(self.LowerLimit,self.UpperLimit)))
                         pygame.display.update()
                         
         pygame.quit()
         quit()        
-        
 
-
-lowint = int(raw_input('Lower Limit?'))
-highint = int(raw_input('Upper Limit?'))
-
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="RandomNumberGenerator.py v1.0 A large-font graphical random number generator. (c) J.J. Gerschler")
+    parser.add_argument("-l", "--lower", help="Lower limit (inclusive)")
+    parser.add_argument("-u", "--upper", help="Upper limit (inclusive)")
+    args = parser.parse_args()
+    
+    print("")
+    print("When screen loads, press the spacebar to generate a random number!")
+    print("")
+    NewNumber = RandomNumberGenerator(int(args.lower),int(args.upper))
+    NewNumber.main_loop()

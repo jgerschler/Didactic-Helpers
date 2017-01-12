@@ -77,8 +77,8 @@ class CountdownClock(object):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="CountdownClock.py v1.0 A large-font graphical countdown clock. (c) J.J. Gerschler")
     parser.add_argument("-s", "--seconds", help="Number of seconds to count down.")
-
     args = parser.parse_args()
+    
     print("")
     print("When screen loads, press the spacebar to start the countdown!")
     print("")
