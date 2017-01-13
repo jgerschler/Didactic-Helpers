@@ -19,13 +19,9 @@ GREEN = (50,150,50)
 YELLOW = (255,200,0)
 BLUE = (0,100,255)
 
-#team key assignments
-Team1Keys = [pygame.K_a,pygame.K_b,pygame.K_c,pygame.K_d]
-Team2Keys = [pygame.K_e,pygame.K_f,pygame.K_g,pygame.K_h]
-Team3Keys = [pygame.K_i,pygame.K_j,pygame.K_k,pygame.K_l]
-Team4Keys = [pygame.K_m,pygame.K_n,pygame.K_o,pygame.K_p]
-Team5Keys = [pygame.K_q,pygame.K_r,pygame.K_s,pygame.K_t]
-Team6Keys = [pygame.K_u,pygame.K_v,pygame.K_w,pygame.K_x]
+TeamKeyDict = {"Team1":[pygame.K_a,pygame.K_b,pygame.K_c,pygame.K_d],"Team2":[pygame.K_e,pygame.K_f,pygame.K_g,pygame.K_h],
+                "Team3":[pygame.K_i,pygame.K_j,pygame.K_k,pygame.K_l],"Team4":[pygame.K_m,pygame.K_n,pygame.K_o,pygame.K_p],
+                "Team5":[pygame.K_q,pygame.K_r,pygame.K_s,pygame.K_t],"Team6":[pygame.K_u,pygame.K_v,pygame.K_w,pygame.K_x]}
 
 clock = pygame.time.Clock()
 
