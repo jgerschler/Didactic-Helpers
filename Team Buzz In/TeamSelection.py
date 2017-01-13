@@ -1,101 +1,107 @@
 import pygame, sys
 
-TeamFile = 'ping.ogg'
+class TeamBuzzIn(object):
+    def __init__(self):
+        pygame.init()
+        pygame.mixer.init()
 
-pygame.init()
+        self.TeamFile = 'ping.ogg'
+        pygame.mixer.music.load(self.TeamFile)
 
-pygame.mixer.init()
-pygame.mixer.music.load(TeamFile)
+        self.DISPLAY_WIDTH = 1024
+        self.DISPLAY_HEIGHT = 768
 
-DISPLAY_WIDTH = 1024
-DISPLAY_HEIGHT = 768
+        self.BLACK = (0,0,0)
+        self.WHITE = (255,255,255)
+        self.GRAY = (184,184,184)
+        self.RED = (255,0,0)
+        self.GREEN = (50,150,50)
+        self.YELLOW = (255,200,0)
+        self.BLUE = (0,100,255)
 
-#color assignments
-BLACK = (0,0,0)
-WHITE = (255,255,255)
-GRAY = (184,184,184)
-RED = (255,0,0)
-GREEN = (50,150,50)
-YELLOW = (255,200,0)
-BLUE = (0,100,255)
+        self.TeamKeyDict = {"Team1":[pygame.K_a,pygame.K_b,pygame.K_c,pygame.K_d],"Team2":[pygame.K_e,pygame.K_f,pygame.K_g,pygame.K_h],
+                        "Team3":[pygame.K_i,pygame.K_j,pygame.K_k,pygame.K_l],"Team4":[pygame.K_m,pygame.K_n,pygame.K_o,pygame.K_p],
+                        "Team5":[pygame.K_q,pygame.K_r,pygame.K_s,pygame.K_t],"Team6":[pygame.K_u,pygame.K_v,pygame.K_w,pygame.K_x]}
 
-TeamKeyDict = {"Team1":[pygame.K_a,pygame.K_b,pygame.K_c,pygame.K_d],"Team2":[pygame.K_e,pygame.K_f,pygame.K_g,pygame.K_h],
-                "Team3":[pygame.K_i,pygame.K_j,pygame.K_k,pygame.K_l],"Team4":[pygame.K_m,pygame.K_n,pygame.K_o,pygame.K_p],
-                "Team5":[pygame.K_q,pygame.K_r,pygame.K_s,pygame.K_t],"Team6":[pygame.K_u,pygame.K_v,pygame.K_w,pygame.K_x]}
+        self.clock = pygame.time.Clock()
+        self.finished = False
 
-clock = pygame.time.Clock()
+        self.GameDisplay = pygame.display.set_mode((self.DISPLAY_WIDTH, self.DISPLAY_HEIGHT))
+        self.GameDisplay.fill(self.WHITE)
+        pygame.display.update()
 
-finished = False
+    def wait(self):
+        while True:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    sys.exit()
+                if event.type == pygame.KEYUP and event.key == pygame.K_SPACE:
+                    return
 
-gameDisplay = pygame.display.set_mode((DISPLAY_WIDTH, DISPLAY_HEIGHT))
-gameDisplay.fill(WHITE)
-pygame.display.update()
+    def text_objects(self, text, font, color):
+        self.textSurface = font.render(text, True, color)
+        return self.textSurface, self.textSurface.get_rect()
 
-def wait():
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.KEYUP and event.key == pygame.K_SPACE:
-                return
+    def message_display(self, text, color):
+        self.largeText = pygame.font.Font('arial.ttf',144)
+        self.TextSurf, self.TextRect = self.text_objects(text, self.largeText, color)
+        self.TextRect.center = ((self.DISPLAY_WIDTH/2),(self.DISPLAY_HEIGHT/2))
+        self.GameDisplay.blit(self.TextSurf, self.TextRect)
 
-def text_objects(text, font, color):
-    textSurface = font.render(text, True, color)
-    return textSurface, textSurface.get_rect()
+        pygame.display.update()
 
-def message_display(text, color):
-    largeText = pygame.font.Font('arial.ttf',72)
-    TextSurf, TextRect = text_objects(text, largeText, color)
-    TextRect.center = ((DISPLAY_WIDTH/2),(DISPLAY_HEIGHT/2))
-    gameDisplay.blit(TextSurf, TextRect)
+    def run(self):
+        while not self.finished:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.finished = True
+                if event.type == pygame.KEYUP:
+                    if event.key in self.TeamKeyDict["Team1"]:
+                        self.GameDisplay.fill(self.WHITE)
+                        self.message_display("Team 1",self.RED)
+                        pygame.display.update()
+                        pygame.mixer.music.play()
+                        self.wait()
+                    elif event.key in self.TeamKeyDict["Team2"]:
+                        self.GameDisplay.fill(self.WHITE)
+                        self.message_display("Team 2",self.YELLOW)
+                        pygame.display.update()
+                        pygame.mixer.music.play()
+                        self.wait()
+                    elif event.key in self.TeamKeyDict["Team3"]:
+                        self.GameDisplay.fill(self.WHITE)
+                        self.message_display("Team 3",self.GREEN)
+                        pygame.display.update()
+                        pygame.mixer.music.play()
+                        self.wait()
+                    elif event.key in self.TeamKeyDict["Team4"]:
+                        self.GameDisplay.fill(self.WHITE)
+                        self.message_display("Team 4",self.BLUE)
+                        pygame.display.update()
+                        pygame.mixer.music.play()
+                        self.wait()
+                    elif event.key in self.TeamKeyDict["Team5"]:
+                        self.GameDisplay.fill(self.WHITE)
+                        self.message_display("Team 5",self.BLACK)
+                        pygame.display.update()
+                        pygame.mixer.music.play()
+                        self.wait()
+                    elif event.key in self.TeamKeyDict["Team6"]:
+                        self.GameDisplay.fill(self.WHITE)
+                        self.message_display("Team 6",self.GRAY)
+                        pygame.display.update()
+                        pygame.mixer.music.play()
+                        self.wait()
 
-    pygame.display.update()
+            self.clock.tick(60)
+                        
+        pygame.quit()
+        quit()
 
-def run(self):
-    while not finished:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                finished = True
-            if event.type == pygame.KEYUP:
-                if event.key in Team1Keys:
-                    gameDisplay.fill(WHITE)
-                    message_display("Team 1",RED)
-                    pygame.display.update()
-                    pygame.mixer.music.play()
-                    wait()
-                elif event.key in Team2Keys:
-                    gameDisplay.fill(WHITE)
-                    message_display("Team 2",YELLOW)
-                    pygame.display.update()
-                    pygame.mixer.music.play()
-                    wait()
-                elif event.key in Team3Keys:
-                    gameDisplay.fill(WHITE)
-                    message_display("Team 3",GREEN)
-                    pygame.display.update()
-                    pygame.mixer.music.play()
-                    wait()
-                elif event.key in Team4Keys:
-                    gameDisplay.fill(WHITE)
-                    message_display("Team 4",BLUE)
-                    pygame.display.update()
-                    pygame.mixer.music.play()
-                    wait()
-                elif event.key in Team5Keys:
-                    gameDisplay.fill(WHITE)
-                    message_display("Team 5",BLACK)
-                    pygame.display.update()
-                    pygame.mixer.music.play()
-                    wait()
-                elif event.key in Team6Keys:
-                    gameDisplay.fill(WHITE)
-                    message_display("Team 6",GRAY)
-                    pygame.display.update()
-                    pygame.mixer.music.play()
-                    wait()
-
-        clock.tick(60)
-                    
-    pygame.quit()
-    quit()
+if __name__ == '__main__':
+    print("")
+    print("Press spacebar to start listening for buzz-ins.")
+    print("")
+    NewGame = TeamBuzzIn()
+    NewGame.run()
