@@ -1,33 +1,34 @@
 import pygame, sys
 
 class TeamBuzzIn(object):
+    DISPLAY_WIDTH = 1024
+    DISPLAY_HEIGHT = 768
+
+    BLACK = (0,0,0)
+    WHITE = (255,255,255)
+    GRAY = (184,184,184)
+    RED = (255,0,0)
+    GREEN = (50,150,50)
+    YELLOW = (255,200,0)
+    BLUE = (0,100,255)
+    
+    buzz_sound = 'ping.ogg'
+        
     def __init__(self):
         pygame.init()
         pygame.mixer.init()
 
-        self.TeamFile = 'ping.ogg'
-        pygame.mixer.music.load(self.TeamFile)
+        pygame.mixer.music.load(TeamBuzzIn.buzz_sound)
 
-        self.DISPLAY_WIDTH = 1024
-        self.DISPLAY_HEIGHT = 768
-
-        self.BLACK = (0,0,0)
-        self.WHITE = (255,255,255)
-        self.GRAY = (184,184,184)
-        self.RED = (255,0,0)
-        self.GREEN = (50,150,50)
-        self.YELLOW = (255,200,0)
-        self.BLUE = (0,100,255)
-
-        self.TeamKeyDict = {"Team1":[pygame.K_a,pygame.K_b,pygame.K_c,pygame.K_d],"Team2":[pygame.K_e,pygame.K_f,pygame.K_g,pygame.K_h],
+        self.team_key_dict = {"Team1":[pygame.K_a,pygame.K_b,pygame.K_c,pygame.K_d],"Team2":[pygame.K_e,pygame.K_f,pygame.K_g,pygame.K_h],
                         "Team3":[pygame.K_i,pygame.K_j,pygame.K_k,pygame.K_l],"Team4":[pygame.K_m,pygame.K_n,pygame.K_o,pygame.K_p],
                         "Team5":[pygame.K_q,pygame.K_r,pygame.K_s,pygame.K_t],"Team6":[pygame.K_u,pygame.K_v,pygame.K_w,pygame.K_x]}
 
         self.clock = pygame.time.Clock()
         self.finished = False
 
-        self.GameDisplay = pygame.display.set_mode((self.DISPLAY_WIDTH, self.DISPLAY_HEIGHT))
-        self.GameDisplay.fill(self.WHITE)
+        self.game_display = pygame.display.set_mode((TeamBuzzIn.DISPLAY_WIDTH, TeamBuzzIn.DISPLAY_HEIGHT))
+        self.game_display.fill(TeamBuzzIn.WHITE)
         pygame.display.update()
 
     def wait(self):
@@ -40,14 +41,14 @@ class TeamBuzzIn(object):
                     return
 
     def text_objects(self, text, font, color):
-        self.textSurface = font.render(text, True, color)
-        return self.textSurface, self.textSurface.get_rect()
+        self.text_surface = font.render(text, True, color)
+        return self.text_surface, self.text_surface.get_rect()
 
     def message_display(self, text, color):
-        self.largeText = pygame.font.Font('arial.ttf',144)
-        self.TextSurf, self.TextRect = self.text_objects(text, self.largeText, color)
-        self.TextRect.center = ((self.DISPLAY_WIDTH/2),(self.DISPLAY_HEIGHT/2))
-        self.GameDisplay.blit(self.TextSurf, self.TextRect)
+        self.large_text = pygame.font.Font('arial.ttf',144)
+        self.text_surf, self.text_rect = self.text_objects(text, self.large_text, color)
+        self.text_rect.center = ((TeamBuzzIn.DISPLAY_WIDTH/2),(TeamBuzzIn.DISPLAY_HEIGHT/2))
+        self.game_display.blit(self.text_surf, self.text_rect)
 
         pygame.display.update()
 
@@ -57,39 +58,39 @@ class TeamBuzzIn(object):
                 if event.type == pygame.QUIT:
                     self.finished = True
                 if event.type == pygame.KEYUP:
-                    if event.key in self.TeamKeyDict["Team1"]:
-                        self.GameDisplay.fill(self.WHITE)
-                        self.message_display("Team 1",self.RED)
+                    if event.key in self.team_key_dict["Team1"]:
+                        self.game_display.fill(TeamBuzzIn.WHITE)
+                        self.message_display("Team 1",TeamBuzzIn.RED)
                         pygame.display.update()
                         pygame.mixer.music.play()
                         self.wait()
-                    elif event.key in self.TeamKeyDict["Team2"]:
-                        self.GameDisplay.fill(self.WHITE)
-                        self.message_display("Team 2",self.YELLOW)
+                    elif event.key in self.team_key_dict["Team2"]:
+                        self.game_display.fill(TeamBuzzIn.WHITE)
+                        self.message_display("Team 2",TeamBuzzIn.YELLOW)
                         pygame.display.update()
                         pygame.mixer.music.play()
                         self.wait()
-                    elif event.key in self.TeamKeyDict["Team3"]:
-                        self.GameDisplay.fill(self.WHITE)
-                        self.message_display("Team 3",self.GREEN)
+                    elif event.key in self.team_key_dict["Team3"]:
+                        self.game_display.fill(TeamBuzzIn.WHITE)
+                        self.message_display("Team 3",TeamBuzzIn.GREEN)
                         pygame.display.update()
                         pygame.mixer.music.play()
                         self.wait()
-                    elif event.key in self.TeamKeyDict["Team4"]:
-                        self.GameDisplay.fill(self.WHITE)
-                        self.message_display("Team 4",self.BLUE)
+                    elif event.key in self.team_key_dict["Team4"]:
+                        self.game_display.fill(TeamBuzzIn.WHITE)
+                        self.message_display("Team 4",TeamBuzzIn.BLUE)
                         pygame.display.update()
                         pygame.mixer.music.play()
                         self.wait()
-                    elif event.key in self.TeamKeyDict["Team5"]:
-                        self.GameDisplay.fill(self.WHITE)
-                        self.message_display("Team 5",self.BLACK)
+                    elif event.key in self.team_key_dict["Team5"]:
+                        self.game_display.fill(TeamBuzzIn.WHITE)
+                        self.message_display("Team 5",TeamBuzzIn.BLACK)
                         pygame.display.update()
                         pygame.mixer.music.play()
                         self.wait()
-                    elif event.key in self.TeamKeyDict["Team6"]:
-                        self.GameDisplay.fill(self.WHITE)
-                        self.message_display("Team 6",self.GRAY)
+                    elif event.key in self.team_key_dict["Team6"]:
+                        self.game_display.fill(TeamBuzzIn.WHITE)
+                        self.message_display("Team 6",TeamBuzzIn.GRAY)
                         pygame.display.update()
                         pygame.mixer.music.play()
                         self.wait()
@@ -103,5 +104,5 @@ if __name__ == '__main__':
     print("")
     print("Press spacebar to start listening for buzz-ins.")
     print("")
-    NewGame = TeamBuzzIn()
-    NewGame.run()
+    new_game = TeamBuzzIn()
+    new_game.run()
