@@ -2,60 +2,60 @@ import pygame, time, sys, argparse
 from random import randint
 
 class CountdownClock(object):
-    def __init__(self, StartTime):
-        self.DISPLAY_WIDTH = 1024
-        self.DISPLAY_HEIGHT = 768
+    DISPLAY_WIDTH = 1024
+    DISPLAY_HEIGHT = 768
 
-        self.BLACK = (0,0,0)
-        self.WHITE = (255,255,255)
-        self.RED = (255,0,0)
-
-        self.Finished = False
-        self.StartTime = StartTime
+    BLACK = (0,0,0)
+    WHITE = (255,255,255)
+    RED = (255,0,0)
+    
+    def __init__(self, start_time):
+        self.finished = False
+        self.start_time = start_time
         
         pygame.init()
         pygame.mixer.init()
-        self.TimesUpFile = "TimesUp.ogg"
-        self.TimesUpSound = pygame.mixer.Sound(self.TimesUpFile)
+        self.times_up_file = "TimesUp.ogg"
+        self.times_up_sound = pygame.mixer.Sound(self.times_up_file)
         
-        self.GameDisplay = pygame.display.set_mode((self.DISPLAY_WIDTH, self.DISPLAY_HEIGHT))
+        self.game_display = pygame.display.set_mode((CountdownClock.DISPLAY_WIDTH, CountdownClock.DISPLAY_HEIGHT))
         pygame.display.set_caption('Countdown Clock')
-        self.GameDisplay.fill(self.WHITE)
+        self.game_display.fill(CountdownClock.WHITE)
         pygame.display.update()
 
     def text_objects(self, text, font):
-        self.textSurface = font.render(text, True, self.BLACK)
-        return self.textSurface, self.textSurface.get_rect()
+        self.text_surface = font.render(text, True, CountdownClock.BLACK)
+        return self.text_surface, self.text_surface.get_rect()
 
     def red_text_objects(self, text, font):
-        self.textSurface = font.render(text, True, self.RED)
-        return self.textSurface, self.textSurface.get_rect()
+        self.text_surface = font.render(text, True, CountdownClock.RED)
+        return self.text_surface, self.text_surface.get_rect()
 
     def message_display(self, text):
-        self.LargeText = pygame.font.Font('arial.ttf',240)
-        self.TextSurf, self.TextRect = self.text_objects(text, self.LargeText)
-        self.TextRect.center = ((self.DISPLAY_WIDTH/2),(self.DISPLAY_HEIGHT/2))
-        self.GameDisplay.blit(self.TextSurf, self.TextRect)
+        self.large_text = pygame.font.Font('arial.ttf',240)
+        self.text_surface, self.text_rect = self.text_objects(text, self.large_text)
+        self.text_rect.center = ((CountdownClock.DISPLAY_WIDTH/2),(CountdownClock.DISPLAY_HEIGHT/2))
+        self.game_display.blit(self.text_surface, self.text_rect)
 
     def urgent_message_display(self, text):
-        self.LargeText = pygame.font.Font('arial.ttf',240)
-        self.TextSurf, self.TextRect = self.red_text_objects(text, self.LargeText)
-        self.TextRect.center = ((self.DISPLAY_WIDTH/2),(self.DISPLAY_HEIGHT/2))
-        self.GameDisplay.blit(self.TextSurf, self.TextRect)    
+        self.large_text = pygame.font.Font('arial.ttf',240)
+        self.text_surface, self.text_rect = self.red_text_objects(text, self.large_text)
+        self.text_rect.center = ((CountdownClock.DISPLAY_WIDTH/2),(CountdownClock.DISPLAY_HEIGHT/2))
+        self.game_display.blit(self.text_surface, self.text_rect)    
 
     def times_up(self):
         pygame.quit()
         sys.exit()
 
     def main_loop(self):
-        while not self.Finished:
+        while not self.finished:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    self.Finished = True
+                    self.finished = True
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_SPACE:
-                        for t in range(self.StartTime,-1,-1):
-                            self.GameDisplay.fill(self.WHITE)
+                        for t in range(self.start_time,-1,-1):
+                            self.game_display.fill(CountdownClock.WHITE)
                             minutes = t / 60
                             seconds = t % 60
                             sf = "{:02d}:{:02d}".format(*divmod(t, 60))
@@ -67,7 +67,7 @@ class CountdownClock(object):
                             time.sleep(1)
                             pygame.display.update()
                             
-                        self.TimesUpSound.play()
+                        self.times_up_sound.play()
                         time.sleep(4)
                         self.times_up()
                         
@@ -82,6 +82,6 @@ if __name__ == "__main__":
     print("")
     print("When screen loads, press the spacebar to start the countdown!")
     print("")
-    NewClock = CountdownClock(int(args.seconds))
-    NewClock.main_loop()
+    new_clock = CountdownClock(int(args.seconds))
+    new_clock.main_loop()
 
