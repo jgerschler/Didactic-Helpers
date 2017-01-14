@@ -2,44 +2,44 @@ import pygame, time, argparse
 from random import randint
 
 class RandomNumberGenerator(object):
-    def __init__(self, LowerLimit, UpperLimit):
-        self.DISPLAY_WIDTH = 1024
-        self.DISPLAY_HEIGHT = 768
+    DISPLAY_WIDTH = 1024
+    DISPLAY_HEIGHT = 768
 
-        self.BLACK = (0,0,0)
-        self.WHITE = (255,255,255)
+    BLACK = (0,0,0)
+    WHITE = (255,255,255)
 
-        self.Finished = False
+    def __init__(self, lower_limit, upper_limit):
+        self.finished = False
         
-        self.LowerLimit = LowerLimit
-        self.UpperLimit = UpperLimit
+        self.lower_limit = lower_limit
+        self.upper_limit = upper_limit
 
         pygame.init()
         
-        self.GameDisplay = pygame.display.set_mode((self.DISPLAY_WIDTH, self.DISPLAY_HEIGHT))
+        self.game_display = pygame.display.set_mode((RandomNumberGenerator.DISPLAY_WIDTH, RandomNumberGenerator.DISPLAY_HEIGHT))
         pygame.display.set_caption('Random Number Generator')
-        self.GameDisplay.fill(self.WHITE)
+        self.game_display.fill(RandomNumberGenerator.WHITE)
         pygame.display.update()
         
     def text_objects(self, text, font):
-        self.textSurface = font.render(text, True, self.BLACK)
-        return self.textSurface, self.textSurface.get_rect()
+        self.text_surface = font.render(text, True, RandomNumberGenerator.BLACK)
+        return self.text_surface, self.text_surface.get_rect()
 
     def message_display(self, text):
-        self.LargeText = pygame.font.Font('arial.ttf',432)
-        self.TextSurf, self.TextRect = self.text_objects(text, self.LargeText)
-        self.TextRect.center = ((self.DISPLAY_WIDTH/2),(self.DISPLAY_HEIGHT/2))
-        self.GameDisplay.blit(self.TextSurf, self.TextRect)
+        self.large_text = pygame.font.Font('arial.ttf',432)
+        self.text_surf, self.text_rect = self.text_objects(text, self.large_text)
+        self.text_rect.center = ((RandomNumberGenerator.DISPLAY_WIDTH/2),(RandomNumberGenerator.DISPLAY_HEIGHT/2))
+        self.game_display.blit(self.text_surf, self.text_rect)
 
     def main_loop(self):
-        while not self.Finished:
+        while not self.finished:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
-                    self.Finished = True
+                    self.finished = True
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_SPACE:
-                        self.GameDisplay.fill(self.WHITE)
-                        self.message_display(str(randint(self.LowerLimit,self.UpperLimit)))
+                        self.game_display.fill(RandomNumberGenerator.WHITE)
+                        self.message_display(str(randint(self.lower_limit,self.upper_limit)))
                         pygame.display.update()
                         
         pygame.quit()
@@ -54,5 +54,5 @@ if __name__ == "__main__":
     print("")
     print("When screen loads, press the spacebar to generate a random number!")
     print("")
-    NewNumber = RandomNumberGenerator(int(args.lower),int(args.upper))
-    NewNumber.main_loop()
+    new_number = RandomNumberGenerator(int(args.lower),int(args.upper))
+    new_number.main_loop()

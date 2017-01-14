@@ -33,15 +33,15 @@ class CountdownClock(object):
 
     def message_display(self, text):
         self.large_text = pygame.font.Font('arial.ttf',240)
-        self.text_surface, self.text_rect = self.text_objects(text, self.large_text)
+        self.text_surf, self.text_rect = self.text_objects(text, self.large_text)
         self.text_rect.center = ((CountdownClock.DISPLAY_WIDTH/2),(CountdownClock.DISPLAY_HEIGHT/2))
-        self.game_display.blit(self.text_surface, self.text_rect)
+        self.game_display.blit(self.text_surf, self.text_rect)
 
     def urgent_message_display(self, text):
         self.large_text = pygame.font.Font('arial.ttf',240)
-        self.text_surface, self.text_rect = self.red_text_objects(text, self.large_text)
+        self.text_surf, self.text_rect = self.red_text_objects(text, self.large_text)
         self.text_rect.center = ((CountdownClock.DISPLAY_WIDTH/2),(CountdownClock.DISPLAY_HEIGHT/2))
-        self.game_display.blit(self.text_surface, self.text_rect)    
+        self.game_display.blit(self.text_surf, self.text_rect)    
 
     def times_up(self):
         pygame.quit()
