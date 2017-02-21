@@ -9,4 +9,6 @@ Team 4: m-p
 Team 5: q-t
 Team 6: u-x
 
-This program is designed to be used with buzz-in hardware. A sample is shown in the picture (TeamBuzzers.png) in this directory. The circuit is pulled from a cheap keyboard; large, colorful buttons are wired to press keys on the "keyboard" chip, which are then fed to the computer through the USB connection.
+This program is designed to be used with buzz-in hardware. A sample is shown in the picture (TeamBuzzersSetup.png) in this directory. The circuit is pulled from a cheap keyboard; large, colorful buttons are wired to press keys on the "keyboard" chip, which are then fed to the computer through the USB connection.
+
+More details on hardware setup can be obtained here: http://www.instructables.com/id/Hacking-a-USB-Keyboard/
