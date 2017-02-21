@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import pygame, sys
 
 class TeamBuzzIn(object):
