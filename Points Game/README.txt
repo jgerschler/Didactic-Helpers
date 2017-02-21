@@ -1,6 +1,6 @@
 There are many game possibilities using this program. Here is one possibility:
 
-GUESS THE SENTENCE
+"GUESS THE SENTENCE"
 
 A phrase is written on the board, as a series of dashes (similar to hangman):
 
