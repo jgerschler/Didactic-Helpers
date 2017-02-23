@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import pygame, time, sys, argparse
 from random import randint
 
