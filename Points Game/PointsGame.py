@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python
 import pygame, time, winsound
 from random import randint, sample
 from pygame.locals import *
