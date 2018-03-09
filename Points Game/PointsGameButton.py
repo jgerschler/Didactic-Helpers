@@ -18,8 +18,12 @@ class PointsGame(object):
         self.sound_loss_1 = pygame.mixer.Sound('audio\\Laugh1.ogg')
         self.sound_loss_2 = pygame.mixer.Sound('audio\\Laugh2.ogg')
         self.sound_loss_3 = pygame.mixer.Sound('audio\\Laugh3.ogg')
+        self.sound_loss_4 = pygame.mixer.Sound('audio\\Laugh4.ogg')
+        self.sound_loss_5 = pygame.mixer.Sound('audio\\Laugh5.ogg')
 
-        self.sound_loss_files = [self.sound_loss_0,self.sound_loss_1,self.sound_loss_2,self.sound_loss_3]
+        self.sound_loss_files = [self.sound_loss_0,self.sound_loss_1,
+                                 self.sound_loss_2,self.sound_loss_3,
+                                 self.sound_loss_4,self.sound_loss_5]
 
         self.points_list = ["10 points","20 points","30 points","40 points","-50 points","LOSE TURN"]
 
