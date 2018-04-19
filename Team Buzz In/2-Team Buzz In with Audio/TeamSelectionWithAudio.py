@@ -15,7 +15,7 @@ team_2_sound = pygame.mixer.Sound('audio\\equipo2.ogg')
 left_arrow = pygame.image.load('images\\left_arrow.png')
 right_arrow = pygame.image.load('images\\right_arrow.png')
 
-team_key_dict = {"Team1":[pygame.K_a,pygame.K_b,pygame.K_c,pygame.K_d],"Team2":[pygame.K_e,pygame.K_f,pygame.K_g,pygame.K_h]}
+team_key_dict = {"Team1":[pygame.K_a,pygame.K_b,pygame.K_c,pygame.K_d],"Team2":[pygame.K_e,pygame.K_f,pygame.K_g,pygame.K_h],"Referee":[pygame.K_i,pygame.K_j,pygame.K_k,pygame.K_l,pygame.K_SPACE]}
 
 clock = pygame.time.Clock()
 
@@ -46,7 +46,9 @@ pygame.display.update()
 def wait(finished):
     while not finished:
         for event in pygame.event.get():
-            if event.type == pygame.KEYUP and event.key == pygame.K_SPACE:
+            if event.type == pygame.KEYUP and event.key in team_key_dict["Referee"]:
+                screen.fill(WHITE)
+                pygame.display.update()
                 return
             if event.type == pygame.QUIT:
                 finished = True
