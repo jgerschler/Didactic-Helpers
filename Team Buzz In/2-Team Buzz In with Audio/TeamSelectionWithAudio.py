@@ -25,7 +25,7 @@ screen_height = screen.get_height()
 
 font = pygame.font.Font(None, 512)
 
-team_text_1 = font.render("1", 1, (255, 0, 0))
+team_text_1 = font.render("1", 1, (0, 0, 255))
 team_text_rect_1 = team_text_1.get_rect()
 team_text_rect_1.center = (screen_width / 2, screen_height / 2)
 
@@ -36,8 +36,8 @@ team_text_rect_2.center = (screen_width / 2, screen_height / 2)
 left_arrow_rect = left_arrow.get_rect()
 right_arrow_rect = right_arrow.get_rect()
 
-left_arrow_rect.midleft = (100, screen_height / 2)
-right_arrow_rect.midright = (screen_width - 100, screen_height / 2)
+left_arrow_rect.midleft = (30, screen_height / 2)
+right_arrow_rect.midright = (screen_width - 30, screen_height / 2)
 
 screen.fill(WHITE)
 pygame.display.update()
