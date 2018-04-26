@@ -46,14 +46,5 @@ class RandomNumberGenerator(object):
         pygame.quit()
         quit()        
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="RandomNumberGenerator.py v1.0 A large-font graphical random number generator. (c) J.J. Gerschler")
-    parser.add_argument("-l", "--lower", help="Lower limit (inclusive)")
-    parser.add_argument("-u", "--upper", help="Upper limit (inclusive)")
-    args = parser.parse_args()
-    
-    print("")
-    print("When screen loads, press the spacebar to generate a random number!")
-    print("")
-    new_number = RandomNumberGenerator(int(args.lower),int(args.upper))
-    new_number.main_loop()
+new_number = RandomNumberGenerator(1, 5)
+new_number.main_loop()
