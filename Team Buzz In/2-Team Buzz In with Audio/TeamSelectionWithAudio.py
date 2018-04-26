@@ -51,15 +51,15 @@ def wait(finished):
     while not finished:
         for event in pygame.event.get():
             if event.type == pygame.KEYUP:
-                if event.key == pygame.K_o:
+                if event.key == pygame.K_l:
                     screen.fill(WHITE)
                     pygame.display.update()
                     return
-                if event.key == pygame.K_l:
+                if event.key == pygame.K_i:
                     incorrect_sound.play()
-                if event.key == pygame.K_m:
+                if event.key == pygame.K_j:
                     sad_sound.play()
-                if event.key == pygame.K_n:
+                if event.key == pygame.K_k:
                     correct_sound.play()
             if event.type == pygame.QUIT:
                 finished = True
@@ -84,11 +84,11 @@ while not finished:
                 pygame.display.update()
                 team_2_sound.play()
                 finished = wait(finished)
-            if event.key == pygame.K_l:
+            if event.key == pygame.K_i:
                 incorrect_sound.play()
-            if event.key == pygame.K_m:
+            if event.key == pygame.K_j:
                 sad_sound.play()
-            if event.key == pygame.K_n:
+            if event.key == pygame.K_k:
                 correct_sound.play()
         if event.type == pygame.QUIT:
             finished = True
