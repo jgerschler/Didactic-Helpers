@@ -11,11 +11,15 @@ pygame.mixer.init()
 
 team_1_sound = pygame.mixer.Sound('audio\\equipo1.ogg')
 team_2_sound = pygame.mixer.Sound('audio\\equipo2.ogg')
+incorrect_sound = pygame.mixer.Sound('audio\\incorrect.ogg')
+correct_sound = pygame.mixer.Sound('audio\\correct.ogg')
+sad_sound = pygame.mixer.Sound('audio\\trombone.ogg')
 
 left_arrow = pygame.image.load('images\\left_arrow.png')
 right_arrow = pygame.image.load('images\\right_arrow.png')
 
-team_key_dict = {"Team1":[pygame.K_a,pygame.K_b,pygame.K_c,pygame.K_d],"Team2":[pygame.K_e,pygame.K_f,pygame.K_g,pygame.K_h],"Referee":[pygame.K_i,pygame.K_j,pygame.K_k,pygame.K_l,pygame.K_SPACE]}
+team_key_dict = {"Team1":[pygame.K_a,pygame.K_b,pygame.K_c,pygame.K_d],
+                 "Team2":[pygame.K_e,pygame.K_f,pygame.K_g,pygame.K_h]}
 
 clock = pygame.time.Clock()
 
@@ -25,7 +29,7 @@ screen_height = screen.get_height()
 
 font = pygame.font.Font(None, 512)
 
-team_text_1 = font.render("1", 1, (0, 0, 255))
+team_text_1 = font.render("1", 1, (255, 0, 0))
 team_text_rect_1 = team_text_1.get_rect()
 team_text_rect_1.center = (screen_width / 2, screen_height / 2)
 
@@ -36,8 +40,8 @@ team_text_rect_2.center = (screen_width / 2, screen_height / 2)
 left_arrow_rect = left_arrow.get_rect()
 right_arrow_rect = right_arrow.get_rect()
 
-left_arrow_rect.midleft = (30, screen_height / 2)
-right_arrow_rect.midright = (screen_width - 30, screen_height / 2)
+left_arrow_rect.midleft = (100, screen_height / 2)
+right_arrow_rect.midright = (screen_width - 100, screen_height / 2)
 
 screen.fill(WHITE)
 pygame.display.update()
@@ -46,10 +50,17 @@ pygame.display.update()
 def wait(finished):
     while not finished:
         for event in pygame.event.get():
-            if event.type == pygame.KEYUP and event.key in team_key_dict["Referee"]:
-                screen.fill(WHITE)
-                pygame.display.update()
-                return
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_o:
+                    screen.fill(WHITE)
+                    pygame.display.update()
+                    return
+                if event.key == pygame.K_l:
+                    incorrect_sound.play()
+                if event.key == pygame.K_m:
+                    sad_sound.play()
+                if event.key == pygame.K_n:
+                    correct_sound.play()
             if event.type == pygame.QUIT:
                 finished = True
             if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
@@ -73,6 +84,12 @@ while not finished:
                 pygame.display.update()
                 team_2_sound.play()
                 finished = wait(finished)
+            if event.key == pygame.K_l:
+                incorrect_sound.play()
+            if event.key == pygame.K_m:
+                sad_sound.play()
+            if event.key == pygame.K_n:
+                correct_sound.play()
         if event.type == pygame.QUIT:
             finished = True
         if event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
