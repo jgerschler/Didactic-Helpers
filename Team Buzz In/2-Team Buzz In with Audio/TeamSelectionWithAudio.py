@@ -40,8 +40,8 @@ team_text_rect_2.center = (screen_width / 2, screen_height / 2)
 left_arrow_rect = left_arrow.get_rect()
 right_arrow_rect = right_arrow.get_rect()
 
-left_arrow_rect.midleft = (100, screen_height / 2)
-right_arrow_rect.midright = (screen_width - 100, screen_height / 2)
+left_arrow_rect.midleft = (30, screen_height / 2)
+right_arrow_rect.midright = (screen_width - 30, screen_height / 2)
 
 screen.fill(WHITE)
 pygame.display.update()
