@@ -33,7 +33,7 @@ class CountdownClock(object):
         return self.text_surface, self.text_surface.get_rect()
 
     def message_display(self, text):
-        self.large_text = pygame.font.Font('Arial.ttf',240)
+        self.large_text = pygame.font.Font(None, 240)
         self.text_surf, self.text_rect = self.text_objects(text, self.large_text)
         self.text_rect.center = ((CountdownClock.DISPLAY_WIDTH/2),(CountdownClock.DISPLAY_HEIGHT/2))
         self.game_display.blit(self.text_surf, self.text_rect)
