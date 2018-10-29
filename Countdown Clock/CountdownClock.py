@@ -39,7 +39,7 @@ class CountdownClock(object):
         self.game_display.blit(self.text_surf, self.text_rect)
 
     def urgent_message_display(self, text):
-        self.large_text = pygame.font.Font('Arial.ttf',240)
+        self.large_text = pygame.font.Font(None,240)
         self.text_surf, self.text_rect = self.red_text_objects(text, self.large_text)
         self.text_rect.center = ((CountdownClock.DISPLAY_WIDTH/2),(CountdownClock.DISPLAY_HEIGHT/2))
         self.game_display.blit(self.text_surf, self.text_rect)    
@@ -75,14 +75,17 @@ class CountdownClock(object):
         pygame.quit()
         quit()
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="CountdownClock.py v1.0 A large-font graphical countdown clock. (c) J.J. Gerschler")
-    parser.add_argument("-s", "--seconds", help="Number of seconds to count down.")
-    args = parser.parse_args()
-    
-    print("")
-    print("When screen loads, press the spacebar to start the countdown!")
-    print("")
-    new_clock = CountdownClock(int(args.seconds))
-    new_clock.main_loop()
+new_clock = CountdownClock(240)
+new_clock.main_loop()
+
+##if __name__ == "__main__":
+##    parser = argparse.ArgumentParser(description="CountdownClock.py v1.0 A large-font graphical countdown clock. (c) J.J. Gerschler")
+##    parser.add_argument("-s", "--seconds", help="Number of seconds to count down.")
+##    args = parser.parse_args()
+##    
+##    print("")
+##    print("When screen loads, press the spacebar to start the countdown!")
+##    print("")
+##    new_clock = CountdownClock(int(args.seconds))
+##    new_clock.main_loop()
 
